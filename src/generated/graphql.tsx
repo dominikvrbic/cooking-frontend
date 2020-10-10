@@ -25,6 +25,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  homePage?: Maybe<HomePage>;
   recipe?: Maybe<Recipe>;
   recipes?: Maybe<Array<Maybe<Recipe>>>;
   recipesConnection?: Maybe<RecipeConnection>;
@@ -40,6 +41,7 @@ export type Query = {
   user?: Maybe<UsersPermissionsUser>;
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
+  recipeBySlug?: Maybe<Recipe>;
   me?: Maybe<UsersPermissionsMe>;
 };
 
@@ -145,6 +147,24 @@ export type QueryUsersConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
+
+export type QueryRecipeBySlugArgs = {
+  id?: Maybe<Scalars['ID']>;
+  slug?: Maybe<Scalars['String']>;
+};
+
+export type HomePage = {
+  __typename?: 'HomePage';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  weRecommend?: Maybe<Recipe>;
+  topRated?: Maybe<Array<Maybe<ComponentHomepageTopRated>>>;
+  mostViewed?: Maybe<Array<Maybe<ComponentHomepageMostViewed>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
+};
+
+
 export type Recipe = {
   __typename?: 'Recipe';
   id: Scalars['ID'];
@@ -186,7 +206,6 @@ export type RecipeReviewsArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
 export type ComponentStepsSteps = {
   __typename?: 'ComponentStepsSteps';
   id: Scalars['ID'];
@@ -211,6 +230,7 @@ export type UsersPermissionsUser = {
   confirmed?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<UsersPermissionsRole>;
+  avatar?: Maybe<UploadFile>;
   recipes?: Maybe<Array<Maybe<Recipe>>>;
   reviews?: Maybe<Array<Maybe<Review>>>;
 };
@@ -268,18 +288,6 @@ export type UsersPermissionsPermission = {
   role?: Maybe<UsersPermissionsRole>;
 };
 
-export type Review = {
-  __typename?: 'Review';
-  id: Scalars['ID'];
-  created_at: Scalars['DateTime'];
-  updated_at: Scalars['DateTime'];
-  comment: Scalars['String'];
-  grade?: Maybe<Scalars['Int']>;
-  recipe?: Maybe<Recipe>;
-  users_permissions_user?: Maybe<UsersPermissionsUser>;
-  published_at?: Maybe<Scalars['DateTime']>;
-};
-
 export type UploadFile = {
   __typename?: 'UploadFile';
   id: Scalars['ID'];
@@ -310,7 +318,7 @@ export type UploadFileRelatedArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Recipe | RecipeConnection | RecipeAggregator | RecipeAggregatorSum | RecipeAggregatorAvg | RecipeAggregatorMin | RecipeAggregatorMax | RecipeGroupBy | RecipeConnectionId | RecipeConnectionCreated_At | RecipeConnectionUpdated_At | RecipeConnectionName | RecipeConnectionNumber_Of_Servings | RecipeConnectionTime | RecipeConnectionSlug | RecipeConnectionPublished_At | CreateRecipePayload | UpdateRecipePayload | DeleteRecipePayload | Review | ReviewConnection | ReviewAggregator | ReviewAggregatorSum | ReviewAggregatorAvg | ReviewAggregatorMin | ReviewAggregatorMax | ReviewGroupBy | ReviewConnectionId | ReviewConnectionCreated_At | ReviewConnectionUpdated_At | ReviewConnectionComment | ReviewConnectionGrade | ReviewConnectionRecipe | ReviewConnectionUsers_Permissions_User | ReviewConnectionPublished_At | CreateReviewPayload | UpdateReviewPayload | DeleteReviewPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentIngredientsIngredients | ComponentStepsSteps;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | HomePage | UpdateHomePagePayload | DeleteHomePagePayload | Recipe | RecipeConnection | RecipeAggregator | RecipeAggregatorSum | RecipeAggregatorAvg | RecipeAggregatorMin | RecipeAggregatorMax | RecipeGroupBy | RecipeConnectionId | RecipeConnectionCreated_At | RecipeConnectionUpdated_At | RecipeConnectionName | RecipeConnectionNumber_Of_Servings | RecipeConnectionTime | RecipeConnectionSlug | RecipeConnectionPublished_At | CreateRecipePayload | UpdateRecipePayload | DeleteRecipePayload | Review | ReviewConnection | ReviewAggregator | ReviewAggregatorSum | ReviewAggregatorAvg | ReviewAggregatorMin | ReviewAggregatorMax | ReviewGroupBy | ReviewConnectionId | ReviewConnectionCreated_At | ReviewConnectionUpdated_At | ReviewConnectionComment | ReviewConnectionGrade | ReviewConnectionRecipe | ReviewConnectionUsers_Permissions_User | ReviewConnectionPublished_At | CreateReviewPayload | UpdateReviewPayload | DeleteReviewPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionAvatar | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentHomepageMostViewed | ComponentHomepageTopRated | ComponentIngredientsIngredients | ComponentStepsSteps;
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
@@ -339,6 +347,16 @@ export type UsersPermissionsLoginPayload = {
 export type UserPermissionsPasswordPayload = {
   __typename?: 'UserPermissionsPasswordPayload';
   ok: Scalars['Boolean'];
+};
+
+export type UpdateHomePagePayload = {
+  __typename?: 'updateHomePagePayload';
+  homePage?: Maybe<HomePage>;
+};
+
+export type DeleteHomePagePayload = {
+  __typename?: 'deleteHomePagePayload';
+  homePage?: Maybe<HomePage>;
 };
 
 export type RecipeConnection = {
@@ -455,6 +473,18 @@ export type UpdateRecipePayload = {
 export type DeleteRecipePayload = {
   __typename?: 'deleteRecipePayload';
   recipe?: Maybe<Recipe>;
+};
+
+export type Review = {
+  __typename?: 'Review';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  comment: Scalars['String'];
+  grade?: Maybe<Scalars['Int']>;
+  recipe?: Maybe<Recipe>;
+  users_permissions_user?: Maybe<UsersPermissionsUser>;
+  published_at?: Maybe<Scalars['DateTime']>;
 };
 
 export type ReviewConnection = {
@@ -820,6 +850,7 @@ export type UsersPermissionsUserGroupBy = {
   confirmed?: Maybe<Array<Maybe<UsersPermissionsUserConnectionConfirmed>>>;
   blocked?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBlocked>>>;
   role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>;
+  avatar?: Maybe<Array<Maybe<UsersPermissionsUserConnectionAvatar>>>;
 };
 
 export type UsersPermissionsUserConnectionId = {
@@ -876,6 +907,12 @@ export type UsersPermissionsUserConnectionRole = {
   connection?: Maybe<UsersPermissionsUserConnection>;
 };
 
+export type UsersPermissionsUserConnectionAvatar = {
+  __typename?: 'UsersPermissionsUserConnectionAvatar';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<UsersPermissionsUserConnection>;
+};
+
 export type UsersPermissionsUserAggregator = {
   __typename?: 'UsersPermissionsUserAggregator';
   count?: Maybe<Scalars['Int']>;
@@ -897,6 +934,18 @@ export type DeleteUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
+export type ComponentHomepageMostViewed = {
+  __typename?: 'ComponentHomepageMostViewed';
+  id: Scalars['ID'];
+  recipe?: Maybe<Recipe>;
+};
+
+export type ComponentHomepageTopRated = {
+  __typename?: 'ComponentHomepageTopRated';
+  id: Scalars['ID'];
+  recipe?: Maybe<Recipe>;
+};
+
 export enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW'
@@ -904,6 +953,8 @@ export enum PublicationState {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  updateHomePage?: Maybe<UpdateHomePagePayload>;
+  deleteHomePage?: Maybe<DeleteHomePagePayload>;
   createRecipe?: Maybe<CreateRecipePayload>;
   updateRecipe?: Maybe<UpdateRecipePayload>;
   deleteRecipe?: Maybe<DeleteRecipePayload>;
@@ -932,6 +983,11 @@ export type Mutation = {
   forgotPassword?: Maybe<UserPermissionsPasswordPayload>;
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
+};
+
+
+export type MutationUpdateHomePageArgs = {
+  input?: Maybe<UpdateHomePageInput>;
 };
 
 
@@ -1048,6 +1104,29 @@ export type MutationResetPasswordArgs = {
 
 export type MutationEmailConfirmationArgs = {
   confirmation: Scalars['String'];
+};
+
+export type UpdateHomePageInput = {
+  data?: Maybe<EditHomePageInput>;
+};
+
+export type EditHomePageInput = {
+  weRecommend?: Maybe<Scalars['ID']>;
+  topRated?: Maybe<Array<Maybe<EditComponentHomepageTopRatedInput>>>;
+  mostViewed?: Maybe<Array<Maybe<EditComponentHomepageMostViewedInput>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type EditComponentHomepageTopRatedInput = {
+  id?: Maybe<Scalars['ID']>;
+  recipe?: Maybe<Scalars['ID']>;
+};
+
+export type EditComponentHomepageMostViewedInput = {
+  id?: Maybe<Scalars['ID']>;
+  recipe?: Maybe<Scalars['ID']>;
 };
 
 export type CreateRecipeInput = {
@@ -1200,6 +1279,7 @@ export type UserInput = {
   role?: Maybe<Scalars['ID']>;
   recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  avatar?: Maybe<Scalars['ID']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1220,6 +1300,7 @@ export type EditUserInput = {
   role?: Maybe<Scalars['ID']>;
   recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  avatar?: Maybe<Scalars['ID']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1245,6 +1326,23 @@ export type UsersPermissionsRegisterInput = {
   username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type HomePageInput = {
+  weRecommend?: Maybe<Scalars['ID']>;
+  topRated?: Maybe<Array<Maybe<ComponentHomepageTopRatedInput>>>;
+  mostViewed?: Maybe<Array<Maybe<ComponentHomepageMostViewedInput>>>;
+  published_at?: Maybe<Scalars['DateTime']>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+};
+
+export type ComponentHomepageTopRatedInput = {
+  recipe?: Maybe<Scalars['ID']>;
+};
+
+export type ComponentHomepageMostViewedInput = {
+  recipe?: Maybe<Scalars['ID']>;
 };
 
 export type FileInput = {
@@ -1326,6 +1424,76 @@ export type FindRecipeQuery = (
   )>>> }
 );
 
+export type GetHomepageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHomepageQuery = (
+  { __typename?: 'Query' }
+  & { homePage?: Maybe<(
+    { __typename?: 'HomePage' }
+    & { topRated?: Maybe<Array<Maybe<(
+      { __typename?: 'ComponentHomepageTopRated' }
+      & { recipe?: Maybe<(
+        { __typename?: 'Recipe' }
+        & Pick<Recipe, 'name' | 'slug'>
+        & { images?: Maybe<Array<Maybe<(
+          { __typename?: 'UploadFile' }
+          & Pick<UploadFile, 'name' | 'url' | 'hash'>
+        )>>> }
+      )> }
+    )>>>, mostViewed?: Maybe<Array<Maybe<(
+      { __typename?: 'ComponentHomepageMostViewed' }
+      & { recipe?: Maybe<(
+        { __typename?: 'Recipe' }
+        & Pick<Recipe, 'name' | 'slug'>
+        & { images?: Maybe<Array<Maybe<(
+          { __typename?: 'UploadFile' }
+          & Pick<UploadFile, 'name' | 'url' | 'hash'>
+        )>>> }
+      )> }
+    )>>>, weRecommend?: Maybe<(
+      { __typename?: 'Recipe' }
+      & Pick<Recipe, 'name' | 'slug'>
+      & { images?: Maybe<Array<Maybe<(
+        { __typename?: 'UploadFile' }
+        & Pick<UploadFile, 'name' | 'url' | 'hash'>
+      )>>> }
+    )> }
+  )> }
+);
+
+export type CreateUserMutationVariables = Exact<{
+  username: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type CreateUserMutation = (
+  { __typename?: 'Mutation' }
+  & { createUser?: Maybe<(
+    { __typename?: 'createUserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'UsersPermissionsUser' }
+      & Pick<UsersPermissionsUser, 'username' | 'email'>
+    )> }
+  )> }
+);
+
+export type LoginMutationVariables = Exact<{
+  identifier: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type LoginMutation = (
+  { __typename?: 'Mutation' }
+  & { login: (
+    { __typename?: 'UsersPermissionsLoginPayload' }
+    & Pick<UsersPermissionsLoginPayload, 'jwt'>
+  ) }
+);
+
 
 export const FindRecipeDocument = gql`
     query findRecipe($slug: String!) {
@@ -1371,3 +1539,135 @@ export function useFindRecipeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type FindRecipeQueryHookResult = ReturnType<typeof useFindRecipeQuery>;
 export type FindRecipeLazyQueryHookResult = ReturnType<typeof useFindRecipeLazyQuery>;
 export type FindRecipeQueryResult = Apollo.QueryResult<FindRecipeQuery, FindRecipeQueryVariables>;
+export const GetHomepageDocument = gql`
+    query getHomepage {
+  homePage {
+    topRated {
+      recipe {
+        name
+        slug
+        images {
+          name
+          url
+          hash
+        }
+      }
+    }
+    mostViewed {
+      recipe {
+        name
+        slug
+        images {
+          name
+          url
+          hash
+        }
+      }
+    }
+    weRecommend {
+      name
+      slug
+      images {
+        name
+        url
+        hash
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetHomepageQuery__
+ *
+ * To run a query within a React component, call `useGetHomepageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetHomepageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetHomepageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetHomepageQuery(baseOptions?: Apollo.QueryHookOptions<GetHomepageQuery, GetHomepageQueryVariables>) {
+        return Apollo.useQuery<GetHomepageQuery, GetHomepageQueryVariables>(GetHomepageDocument, baseOptions);
+      }
+export function useGetHomepageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetHomepageQuery, GetHomepageQueryVariables>) {
+          return Apollo.useLazyQuery<GetHomepageQuery, GetHomepageQueryVariables>(GetHomepageDocument, baseOptions);
+        }
+export type GetHomepageQueryHookResult = ReturnType<typeof useGetHomepageQuery>;
+export type GetHomepageLazyQueryHookResult = ReturnType<typeof useGetHomepageLazyQuery>;
+export type GetHomepageQueryResult = Apollo.QueryResult<GetHomepageQuery, GetHomepageQueryVariables>;
+export const CreateUserDocument = gql`
+    mutation createUser($username: String!, $email: String!, $password: String!) {
+  createUser(input: {data: {username: $username, email: $email, password: $password}}) {
+    user {
+      username
+      email
+    }
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, baseOptions);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export const LoginDocument = gql`
+    mutation login($identifier: String!, $password: String!) {
+  login(input: {identifier: $identifier, password: $password}) {
+    jwt
+  }
+}
+    `;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
+
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      identifier: // value for 'identifier'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+      }
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;

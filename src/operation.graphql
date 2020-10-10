@@ -14,3 +14,54 @@ query findRecipe($slug: String!) {
     }
   }
 }
+
+query getHomepage {
+  homePage {
+    topRated {
+      recipe {
+        name
+        slug
+        images {
+          name
+          url
+          hash
+        }
+      }
+    }
+    mostViewed {
+      recipe {
+        name
+        slug
+        images {
+          name
+          url
+          hash
+        }
+      }
+    }
+    weRecommend {
+      name
+      slug
+      images {
+        name
+        url
+        hash
+      }
+    }
+  }
+}
+mutation createUser($username: String!, $email: String!, $password: String!) {
+  createUser(
+    input: { data: { username: $username, email: $email, password: $password } }
+  ) {
+    user {
+      username
+      email
+    }
+  }
+}
+mutation login($identifier: String!, $password: String!) {
+  login(input: { identifier: $identifier, password: $password }) {
+    jwt
+  }
+}
