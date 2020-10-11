@@ -11,15 +11,19 @@ import { Signup } from './pages/Signup';
 export const AplicationRouter = () => {
   return (
     <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={LoginPage} />
-        <Route exact path='/signup' component={Signup} />
-        <Route exact path='/profile' component={Profile} />
-        <Route exact path='/recipe/:slug' component={Recipe} />
-      </Switch>
-      <Footer />
+      <div className='flex flex-col h-screen justify-between'>
+        <Navbar />
+        <div className='mb-auto'>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/login' component={LoginPage} />
+            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/recipe/:slug' component={Recipe} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
     </Router>
   );
 };
