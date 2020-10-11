@@ -3,6 +3,17 @@ query findRecipe($slug: String!) {
     image {
       url
     }
+    reviews {
+      comment
+      grade
+      users_permissions_user {
+        username
+        avatar {
+          url
+        }
+      }
+    }
+
     description
     name
     number_of_servings
@@ -14,10 +25,10 @@ query findRecipe($slug: String!) {
       ingredient
     }
     users_permissions_user {
+      username
       avatar {
         url
       }
-      username
     }
   }
 }

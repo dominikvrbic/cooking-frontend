@@ -1415,7 +1415,18 @@ export type FindRecipeQuery = (
     & { image?: Maybe<(
       { __typename?: 'UploadFile' }
       & Pick<UploadFile, 'url'>
-    )>, steps?: Maybe<Array<Maybe<(
+    )>, reviews?: Maybe<Array<Maybe<(
+      { __typename?: 'Review' }
+      & Pick<Review, 'comment' | 'grade'>
+      & { users_permissions_user?: Maybe<(
+        { __typename?: 'UsersPermissionsUser' }
+        & Pick<UsersPermissionsUser, 'username'>
+        & { avatar?: Maybe<(
+          { __typename?: 'UploadFile' }
+          & Pick<UploadFile, 'url'>
+        )> }
+      )> }
+    )>>>, steps?: Maybe<Array<Maybe<(
       { __typename?: 'ComponentStepsSteps' }
       & Pick<ComponentStepsSteps, 'step'>
     )>>>, ingredients?: Maybe<Array<Maybe<(
@@ -1536,6 +1547,16 @@ export const FindRecipeDocument = gql`
     image {
       url
     }
+    reviews {
+      comment
+      grade
+      users_permissions_user {
+        username
+        avatar {
+          url
+        }
+      }
+    }
     description
     name
     number_of_servings
@@ -1547,10 +1568,10 @@ export const FindRecipeDocument = gql`
       ingredient
     }
     users_permissions_user {
+      username
       avatar {
         url
       }
-      username
     }
   }
 }
