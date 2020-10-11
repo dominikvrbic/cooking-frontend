@@ -4,7 +4,7 @@ import { useFindRecipeQuery } from '../generated/graphql';
 interface Props {}
 
 export const Recipe = (props: Props) => {
-  const { data, loading, error } = useFindRecipeQuery({
+  const { data, loading } = useFindRecipeQuery({
     variables: {
       slug: 'test',
     },

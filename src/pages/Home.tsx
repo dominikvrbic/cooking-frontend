@@ -11,7 +11,7 @@ export const Home = (props) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className='container mx-auto'>
           <WeRecomendCard weRecomend={weRecomend} />
         </div>
       )}
