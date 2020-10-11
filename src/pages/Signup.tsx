@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -52,6 +53,13 @@ export const Signup = (props: Props) => {
               type='button'>
               Sign In
             </button>
+            <Link to='/login'>
+              <button
+                className='bg-white hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                type='button'>
+                Login
+              </button>
+            </Link>
           </div>
         </form>
       </div>
