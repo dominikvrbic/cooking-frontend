@@ -186,13 +186,13 @@ export type RecipeReviewsArgs = {
 export type ComponentStepsSteps = {
   __typename?: 'ComponentStepsSteps';
   id: Scalars['ID'];
-  step?: Maybe<Scalars['String']>;
+  step: Scalars['String'];
 };
 
 export type ComponentIngredientsIngredients = {
   __typename?: 'ComponentIngredientsIngredients';
   id: Scalars['ID'];
-  ingredient?: Maybe<Scalars['String']>;
+  ingredient: Scalars['String'];
 };
 
 export type UsersPermissionsUser = {
@@ -1140,11 +1140,11 @@ export type RecipeInput = {
 };
 
 export type ComponentStepsStepInput = {
-  step?: Maybe<Scalars['String']>;
+  step: Scalars['String'];
 };
 
 export type ComponentIngredientsIngredientInput = {
-  ingredient?: Maybe<Scalars['String']>;
+  ingredient: Scalars['String'];
 };
 
 export type UpdateRecipeInput = {
@@ -1321,8 +1321,8 @@ export type UsersPermissionsRegisterInput = {
 
 export type HomePageInput = {
   weRecommend?: Maybe<Scalars['ID']>;
-  topRated?: Maybe<Array<Maybe<ComponentHomepageTopRatedInput>>>;
-  mostViewed?: Maybe<Array<Maybe<ComponentHomepageMostViewedInput>>>;
+  topRated?: Maybe<Array<ComponentHomepageTopRatedInput>>;
+  mostViewed?: Maybe<Array<ComponentHomepageMostViewedInput>>;
   published_at?: Maybe<Scalars['DateTime']>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -1426,7 +1426,7 @@ export type GetHomepageQuery = (
       { __typename?: 'ComponentHomepageTopRated' }
       & { recipe?: Maybe<(
         { __typename?: 'Recipe' }
-        & Pick<Recipe, 'name' | 'slug'>
+        & Pick<Recipe, 'id' | 'name' | 'slug'>
         & { image?: Maybe<(
           { __typename?: 'UploadFile' }
           & Pick<UploadFile, 'name' | 'url' | 'hash'>
@@ -1443,10 +1443,17 @@ export type GetHomepageQuery = (
       { __typename?: 'ComponentHomepageMostViewed' }
       & { recipe?: Maybe<(
         { __typename?: 'Recipe' }
-        & Pick<Recipe, 'name' | 'slug'>
+        & Pick<Recipe, 'id' | 'name' | 'slug'>
         & { image?: Maybe<(
           { __typename?: 'UploadFile' }
           & Pick<UploadFile, 'name' | 'url' | 'hash'>
+        )>, users_permissions_user?: Maybe<(
+          { __typename?: 'UsersPermissionsUser' }
+          & Pick<UsersPermissionsUser, 'username'>
+          & { avatar?: Maybe<(
+            { __typename?: 'UploadFile' }
+            & Pick<UploadFile, 'url'>
+          )> }
         )> }
       )> }
     )>>>, weRecommend?: Maybe<(
@@ -1549,6 +1556,7 @@ export const GetHomepageDocument = gql`
   homePage {
     topRated {
       recipe {
+        id
         name
         slug
         image {
@@ -1566,12 +1574,19 @@ export const GetHomepageDocument = gql`
     }
     mostViewed {
       recipe {
+        id
         name
         slug
         image {
           name
           url
           hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
         }
       }
     }
