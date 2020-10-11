@@ -1,5 +1,8 @@
 query findRecipe($slug: String!) {
-  recipes(where: { slug: $slug }) {
+  recipes(where: { slug: "grah" }) {
+    image {
+      url
+    }
     name
     number_of_servings
     time

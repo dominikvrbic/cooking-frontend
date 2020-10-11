@@ -1412,7 +1412,10 @@ export type FindRecipeQuery = (
   & { recipes?: Maybe<Array<Maybe<(
     { __typename?: 'Recipe' }
     & Pick<Recipe, 'name' | 'number_of_servings' | 'time'>
-    & { steps?: Maybe<Array<Maybe<(
+    & { image?: Maybe<(
+      { __typename?: 'UploadFile' }
+      & Pick<UploadFile, 'url'>
+    )>, steps?: Maybe<Array<Maybe<(
       { __typename?: 'ComponentStepsSteps' }
       & Pick<ComponentStepsSteps, 'step'>
     )>>>, ingredients?: Maybe<Array<Maybe<(
@@ -1525,7 +1528,10 @@ export type LoginMutation = (
 
 export const FindRecipeDocument = gql`
     query findRecipe($slug: String!) {
-  recipes(where: {slug: $slug}) {
+  recipes(where: {slug: "grah"}) {
+    image {
+      url
+    }
     name
     number_of_servings
     time
