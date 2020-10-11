@@ -41,7 +41,6 @@ export type Query = {
   user?: Maybe<UsersPermissionsUser>;
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
-  recipeBySlug?: Maybe<Recipe>;
   me?: Maybe<UsersPermissionsMe>;
 };
 
@@ -147,12 +146,6 @@ export type QueryUsersConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-
-export type QueryRecipeBySlugArgs = {
-  id?: Maybe<Scalars['ID']>;
-  slug?: Maybe<Scalars['String']>;
-};
-
 export type HomePage = {
   __typename?: 'HomePage';
   id: Scalars['ID'];
@@ -175,27 +168,11 @@ export type Recipe = {
   time: Scalars['Int'];
   steps?: Maybe<Array<Maybe<ComponentStepsSteps>>>;
   ingredients?: Maybe<Array<Maybe<ComponentIngredientsIngredients>>>;
+  users_permissions_user?: Maybe<UsersPermissionsUser>;
+  image?: Maybe<UploadFile>;
   slug?: Maybe<Scalars['String']>;
   published_at?: Maybe<Scalars['DateTime']>;
-  users_permissions_users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
-  images?: Maybe<Array<Maybe<UploadFile>>>;
   reviews?: Maybe<Array<Maybe<Review>>>;
-};
-
-
-export type RecipeUsers_Permissions_UsersArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type RecipeImagesArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
 };
 
 
@@ -218,7 +195,6 @@ export type ComponentIngredientsIngredients = {
   ingredient?: Maybe<Scalars['String']>;
 };
 
-
 export type UsersPermissionsUser = {
   __typename?: 'UsersPermissionsUser';
   id: Scalars['ID'];
@@ -231,12 +207,12 @@ export type UsersPermissionsUser = {
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<UsersPermissionsRole>;
   avatar?: Maybe<UploadFile>;
-  recipes?: Maybe<Array<Maybe<Recipe>>>;
   reviews?: Maybe<Array<Maybe<Review>>>;
+  recipes?: Maybe<Array<Maybe<Recipe>>>;
 };
 
 
-export type UsersPermissionsUserRecipesArgs = {
+export type UsersPermissionsUserReviewsArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
@@ -244,7 +220,7 @@ export type UsersPermissionsUserRecipesArgs = {
 };
 
 
-export type UsersPermissionsUserReviewsArgs = {
+export type UsersPermissionsUserRecipesArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
@@ -276,6 +252,7 @@ export type UsersPermissionsRoleUsersArgs = {
   start?: Maybe<Scalars['Int']>;
   where?: Maybe<Scalars['JSON']>;
 };
+
 
 export type UsersPermissionsPermission = {
   __typename?: 'UsersPermissionsPermission';
@@ -318,7 +295,7 @@ export type UploadFileRelatedArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | HomePage | UpdateHomePagePayload | DeleteHomePagePayload | Recipe | RecipeConnection | RecipeAggregator | RecipeAggregatorSum | RecipeAggregatorAvg | RecipeAggregatorMin | RecipeAggregatorMax | RecipeGroupBy | RecipeConnectionId | RecipeConnectionCreated_At | RecipeConnectionUpdated_At | RecipeConnectionName | RecipeConnectionNumber_Of_Servings | RecipeConnectionTime | RecipeConnectionSlug | RecipeConnectionPublished_At | CreateRecipePayload | UpdateRecipePayload | DeleteRecipePayload | Review | ReviewConnection | ReviewAggregator | ReviewAggregatorSum | ReviewAggregatorAvg | ReviewAggregatorMin | ReviewAggregatorMax | ReviewGroupBy | ReviewConnectionId | ReviewConnectionCreated_At | ReviewConnectionUpdated_At | ReviewConnectionComment | ReviewConnectionGrade | ReviewConnectionRecipe | ReviewConnectionUsers_Permissions_User | ReviewConnectionPublished_At | CreateReviewPayload | UpdateReviewPayload | DeleteReviewPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionAvatar | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentHomepageMostViewed | ComponentHomepageTopRated | ComponentIngredientsIngredients | ComponentStepsSteps;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | HomePage | UpdateHomePagePayload | DeleteHomePagePayload | Recipe | RecipeConnection | RecipeAggregator | RecipeAggregatorSum | RecipeAggregatorAvg | RecipeAggregatorMin | RecipeAggregatorMax | RecipeGroupBy | RecipeConnectionId | RecipeConnectionCreated_At | RecipeConnectionUpdated_At | RecipeConnectionName | RecipeConnectionNumber_Of_Servings | RecipeConnectionTime | RecipeConnectionUsers_Permissions_User | RecipeConnectionImage | RecipeConnectionSlug | RecipeConnectionPublished_At | CreateRecipePayload | UpdateRecipePayload | DeleteRecipePayload | Review | ReviewConnection | ReviewAggregator | ReviewAggregatorSum | ReviewAggregatorAvg | ReviewAggregatorMin | ReviewAggregatorMax | ReviewGroupBy | ReviewConnectionId | ReviewConnectionCreated_At | ReviewConnectionUpdated_At | ReviewConnectionComment | ReviewConnectionGrade | ReviewConnectionRecipe | ReviewConnectionUsers_Permissions_User | ReviewConnectionPublished_At | CreateReviewPayload | UpdateReviewPayload | DeleteReviewPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | DeleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionAvatar | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentHomepageMostViewed | ComponentHomepageTopRated | ComponentIngredientsIngredients | ComponentStepsSteps;
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
@@ -374,6 +351,8 @@ export type RecipeGroupBy = {
   name?: Maybe<Array<Maybe<RecipeConnectionName>>>;
   number_of_servings?: Maybe<Array<Maybe<RecipeConnectionNumber_Of_Servings>>>;
   time?: Maybe<Array<Maybe<RecipeConnectionTime>>>;
+  users_permissions_user?: Maybe<Array<Maybe<RecipeConnectionUsers_Permissions_User>>>;
+  image?: Maybe<Array<Maybe<RecipeConnectionImage>>>;
   slug?: Maybe<Array<Maybe<RecipeConnectionSlug>>>;
   published_at?: Maybe<Array<Maybe<RecipeConnectionPublished_At>>>;
 };
@@ -411,6 +390,18 @@ export type RecipeConnectionNumber_Of_Servings = {
 export type RecipeConnectionTime = {
   __typename?: 'RecipeConnectionTime';
   key?: Maybe<Scalars['Int']>;
+  connection?: Maybe<RecipeConnection>;
+};
+
+export type RecipeConnectionUsers_Permissions_User = {
+  __typename?: 'RecipeConnectionUsers_permissions_user';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<RecipeConnection>;
+};
+
+export type RecipeConnectionImage = {
+  __typename?: 'RecipeConnectionImage';
+  key?: Maybe<Scalars['ID']>;
   connection?: Maybe<RecipeConnection>;
 };
 
@@ -1139,8 +1130,8 @@ export type RecipeInput = {
   time: Scalars['Int'];
   steps?: Maybe<Array<ComponentStepsStepInput>>;
   ingredients?: Maybe<Array<ComponentIngredientsIngredientInput>>;
-  users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  users_permissions_user?: Maybe<Scalars['ID']>;
+  image?: Maybe<Scalars['ID']>;
   slug?: Maybe<Scalars['String']>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
   published_at?: Maybe<Scalars['DateTime']>;
@@ -1171,8 +1162,8 @@ export type EditRecipeInput = {
   time?: Maybe<Scalars['Int']>;
   steps?: Maybe<Array<Maybe<EditComponentStepsStepInput>>>;
   ingredients?: Maybe<Array<Maybe<EditComponentIngredientsIngredientInput>>>;
-  users_permissions_users?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  users_permissions_user?: Maybe<Scalars['ID']>;
+  image?: Maybe<Scalars['ID']>;
   slug?: Maybe<Scalars['String']>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
   published_at?: Maybe<Scalars['DateTime']>;
@@ -1277,9 +1268,9 @@ export type UserInput = {
   confirmed?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<Scalars['ID']>;
-  recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
   avatar?: Maybe<Scalars['ID']>;
+  recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1298,9 +1289,9 @@ export type EditUserInput = {
   confirmed?: Maybe<Scalars['Boolean']>;
   blocked?: Maybe<Scalars['Boolean']>;
   role?: Maybe<Scalars['ID']>;
-  recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
   avatar?: Maybe<Scalars['ID']>;
+  recipes?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
 };
@@ -1417,10 +1408,10 @@ export type FindRecipeQuery = (
     )>>>, ingredients?: Maybe<Array<Maybe<(
       { __typename?: 'ComponentIngredientsIngredients' }
       & Pick<ComponentIngredientsIngredients, 'ingredient'>
-    )>>>, users_permissions_users?: Maybe<Array<Maybe<(
+    )>>>, users_permissions_user?: Maybe<(
       { __typename?: 'UsersPermissionsUser' }
       & Pick<UsersPermissionsUser, 'username'>
-    )>>> }
+    )> }
   )>>> }
 );
 
@@ -1436,28 +1427,41 @@ export type GetHomepageQuery = (
       & { recipe?: Maybe<(
         { __typename?: 'Recipe' }
         & Pick<Recipe, 'name' | 'slug'>
-        & { images?: Maybe<Array<Maybe<(
+        & { image?: Maybe<(
           { __typename?: 'UploadFile' }
           & Pick<UploadFile, 'name' | 'url' | 'hash'>
-        )>>> }
+        )>, users_permissions_user?: Maybe<(
+          { __typename?: 'UsersPermissionsUser' }
+          & Pick<UsersPermissionsUser, 'username'>
+          & { avatar?: Maybe<(
+            { __typename?: 'UploadFile' }
+            & Pick<UploadFile, 'url'>
+          )> }
+        )> }
       )> }
     )>>>, mostViewed?: Maybe<Array<Maybe<(
       { __typename?: 'ComponentHomepageMostViewed' }
       & { recipe?: Maybe<(
         { __typename?: 'Recipe' }
         & Pick<Recipe, 'name' | 'slug'>
-        & { images?: Maybe<Array<Maybe<(
+        & { image?: Maybe<(
           { __typename?: 'UploadFile' }
           & Pick<UploadFile, 'name' | 'url' | 'hash'>
-        )>>> }
+        )> }
       )> }
     )>>>, weRecommend?: Maybe<(
       { __typename?: 'Recipe' }
       & Pick<Recipe, 'name' | 'slug'>
-      & { images?: Maybe<Array<Maybe<(
+      & { users_permissions_user?: Maybe<(
+        { __typename?: 'UsersPermissionsUser' }
+        & { avatar?: Maybe<(
+          { __typename?: 'UploadFile' }
+          & Pick<UploadFile, 'url'>
+        )> }
+      )>, image?: Maybe<(
         { __typename?: 'UploadFile' }
         & Pick<UploadFile, 'name' | 'url' | 'hash'>
-      )>>> }
+      )> }
     )> }
   )> }
 );
@@ -1507,7 +1511,7 @@ export const FindRecipeDocument = gql`
     ingredients {
       ingredient
     }
-    users_permissions_users {
+    users_permissions_user {
       username
     }
   }
@@ -1546,10 +1550,16 @@ export const GetHomepageDocument = gql`
       recipe {
         name
         slug
-        images {
+        image {
           name
           url
           hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
         }
       }
     }
@@ -1557,7 +1567,7 @@ export const GetHomepageDocument = gql`
       recipe {
         name
         slug
-        images {
+        image {
           name
           url
           hash
@@ -1565,9 +1575,14 @@ export const GetHomepageDocument = gql`
       }
     }
     weRecommend {
+      users_permissions_user {
+        avatar {
+          url
+        }
+      }
       name
       slug
-      images {
+      image {
         name
         url
         hash

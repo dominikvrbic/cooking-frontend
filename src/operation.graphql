@@ -9,7 +9,7 @@ query findRecipe($slug: String!) {
     ingredients {
       ingredient
     }
-    users_permissions_users {
+    users_permissions_user {
       username
     }
   }
@@ -21,10 +21,16 @@ query getHomepage {
       recipe {
         name
         slug
-        images {
+        image {
           name
           url
           hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
         }
       }
     }
@@ -32,7 +38,7 @@ query getHomepage {
       recipe {
         name
         slug
-        images {
+        image {
           name
           url
           hash
@@ -40,9 +46,14 @@ query getHomepage {
       }
     }
     weRecommend {
+      users_permissions_user {
+        avatar {
+          url
+        }
+      }
       name
       slug
-      images {
+      image {
         name
         url
         hash
