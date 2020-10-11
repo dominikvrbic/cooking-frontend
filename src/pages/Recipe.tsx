@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFindRecipeQuery } from '../generated/graphql';
+import Spinner from '../components/Spinner';
 
 interface Props {}
 
@@ -9,6 +10,5 @@ export const Recipe = (props: Props) => {
       slug: 'test',
     },
   });
-  //@ts-ignore
-  return <div>{data?.recipes[0]?.name}</div>;
+  return <>{loading ? <Spinner /> : <div>{data?.recipes[0]?.name}</div>}</>;
 };
