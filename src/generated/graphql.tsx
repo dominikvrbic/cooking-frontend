@@ -1454,6 +1454,7 @@ export type GetHomepageQuery = (
       & Pick<Recipe, 'name' | 'slug'>
       & { users_permissions_user?: Maybe<(
         { __typename?: 'UsersPermissionsUser' }
+        & Pick<UsersPermissionsUser, 'username'>
         & { avatar?: Maybe<(
           { __typename?: 'UploadFile' }
           & Pick<UploadFile, 'url'>
@@ -1576,6 +1577,7 @@ export const GetHomepageDocument = gql`
     }
     weRecommend {
       users_permissions_user {
+        username
         avatar {
           url
         }
