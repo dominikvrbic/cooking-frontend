@@ -15,7 +15,7 @@ export const Generic3Card = (props: Props) => {
   return (
     <div>
       <h1 className='text-3xl text-gray-800 text-center pb-10 '>{title}</h1>
-      <div className='flex space-x-20 justify-center pb-10 '>
+      <div className='flex  pb-10 flex-col justify-center lg:flex-row lg:space-x-20'>
         {recipes.map((recipe, index) => (
           <Card key={index} componentHomepageTopRated={recipe} />
         ))}

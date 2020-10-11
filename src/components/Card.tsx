@@ -12,7 +12,7 @@ export const Card = (props: Props) => {
   const { ingredients } = recipe;
   return (
     <Link to={`/recipe/${recipe.slug}`}>
-      <div className='max-w-sm rounded overflow-hidden shadow-lg hover:shadow-2xl'>
+      <div className='max-w-full px-4 mb-6 lg:mb-0 lg:max-w-sm rounded overflow-hidden shadow-lg hover:shadow-2xl'>
         <img
           className='w-full'
           src={getUrl(recipe.image.url)}
