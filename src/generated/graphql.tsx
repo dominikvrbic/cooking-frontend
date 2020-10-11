@@ -1411,7 +1411,7 @@ export type FindRecipeQuery = (
   { __typename?: 'Query' }
   & { recipes?: Maybe<Array<Maybe<(
     { __typename?: 'Recipe' }
-    & Pick<Recipe, 'name' | 'number_of_servings' | 'time'>
+    & Pick<Recipe, 'description' | 'name' | 'number_of_servings' | 'time'>
     & { image?: Maybe<(
       { __typename?: 'UploadFile' }
       & Pick<UploadFile, 'url'>
@@ -1424,6 +1424,10 @@ export type FindRecipeQuery = (
     )>>>, users_permissions_user?: Maybe<(
       { __typename?: 'UsersPermissionsUser' }
       & Pick<UsersPermissionsUser, 'username'>
+      & { avatar?: Maybe<(
+        { __typename?: 'UploadFile' }
+        & Pick<UploadFile, 'url'>
+      )> }
     )> }
   )>>> }
 );
@@ -1528,10 +1532,11 @@ export type LoginMutation = (
 
 export const FindRecipeDocument = gql`
     query findRecipe($slug: String!) {
-  recipes(where: {slug: "grah"}) {
+  recipes(where: {slug: $slug}) {
     image {
       url
     }
+    description
     name
     number_of_servings
     time
@@ -1542,6 +1547,9 @@ export const FindRecipeDocument = gql`
       ingredient
     }
     users_permissions_user {
+      avatar {
+        url
+      }
       username
     }
   }

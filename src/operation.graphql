@@ -1,8 +1,9 @@
 query findRecipe($slug: String!) {
-  recipes(where: { slug: "grah" }) {
+  recipes(where: { slug: $slug }) {
     image {
       url
     }
+    description
     name
     number_of_servings
     time
@@ -13,6 +14,9 @@ query findRecipe($slug: String!) {
       ingredient
     }
     users_permissions_user {
+      avatar {
+        url
+      }
       username
     }
   }
