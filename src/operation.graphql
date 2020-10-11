@@ -19,8 +19,12 @@ query getHomepage {
   homePage {
     topRated {
       recipe {
+        ingredients {
+          ingredient
+        }
         name
         slug
+        description
         image {
           name
           url
@@ -36,12 +40,22 @@ query getHomepage {
     }
     mostViewed {
       recipe {
+        ingredients {
+          ingredient
+        }
         name
         slug
+        description
         image {
           name
           url
           hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
         }
       }
     }
@@ -53,6 +67,7 @@ query getHomepage {
           url
         }
       }
+      description
       name
       slug
       image {
