@@ -13,7 +13,7 @@ export const WeRecommendCard = (props: Props) => {
     <div className='pb-10'>
       <h1 className='text-3xl text-gray-800 text-center pt-10'>We Recomend</h1>
       <Link
-        to={`/recipe/:${weRecommend.slug}`}
+        to={`/recipe/${weRecommend.slug}`}
         className='max-w-sm w-full lg:max-w-full lg:flex mx-5 mt-5 hover:shadow-2xl '>
         <div
           className='h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center '

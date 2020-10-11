@@ -11,7 +11,7 @@ export const Card = (props: Props) => {
   const { recipe } = componentHomepageTopRated;
   const { ingredients } = recipe;
   return (
-    <Link to={`/recipe/:${recipe.slug}`}>
+    <Link to={`/recipe/${recipe.slug}`}>
       <div className='max-w-sm rounded overflow-hidden shadow-lg hover:shadow-2xl'>
         <img
           className='w-full'
