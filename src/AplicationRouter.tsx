@@ -6,6 +6,7 @@ import { Profile } from './pages/Profile';
 import { Recipe } from './pages/Recipe';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { Signup } from './pages/Signup';
 
 export const AplicationRouter = () => {
   return (
@@ -14,6 +15,7 @@ export const AplicationRouter = () => {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/signup' component={Signup} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/recipe/:slug' component={Recipe} />
       </Switch>
