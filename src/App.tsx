@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { AplicationRouter } from './AplicationRouter';
+import { ApplicationRouter } from './ApplicationRouter';
+import { observer } from 'mobx-react';
 
-function App() {
-  return <AplicationRouter />;
-}
-
-export default App;
+export const App = observer(() => {
+  return <ApplicationRouter />;
+});
