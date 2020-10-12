@@ -39,7 +39,7 @@ export const Searchh = () => {
   }, [searchTerm]);
 
   return (
-    <div className='pt-2 relative mx-right text-gray-600 '>
+    <div className='pt-2 relative mx-right text-gray-600  '>
       <input
         className='border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none '
         type='search'
@@ -52,16 +52,17 @@ export const Searchh = () => {
         <Search className='text-gray-600 h-4 w-4 fill-current ' />
       </button>
       {searchTerm && searchResults.length && (
-        <ul>
+        <ul className='absolute m-0 p-0 shadow-sm max-w-full left-0 list-none text-gray-700 bg-white'>
           {searchResults.map((item) => (
-            <li key={item.slug}>
-              <Link to={`/recipe/${item.slug}`}>
+            <li className='w-full' key={item.slug}>
+              <Link className='flex' to={`/recipe/${item.slug}`}>
                 <img
+                  className=' m-2 pr-2'
                   src={getUrl(item.image.url)}
                   alt={item.image.name}
                   style={{ width: '100px' }}
                 />
-                {item.name}
+                <span className='m-2'>   {item.name}</span>
               </Link>
             </li>
           ))}
