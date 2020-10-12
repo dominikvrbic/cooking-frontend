@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { login } from '../utlis/userFunctions';
+import { UserContext } from '../context/UserContext';
 
-interface Props {}
+export default ({ history }) => {
+  const { user, setUser } = useContext(UserContext);
 
-export const LoginPage = (props: Props) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
-    login(data.username, data.password);
+    const userData = await login(data.username, data.password);
+    setUser(userData);
   };
-
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user, history]);
   return (
     <div className='flex justify-center pt-5'>
       <div className='w-full max-w-xs'>

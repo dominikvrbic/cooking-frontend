@@ -21,7 +21,7 @@ export const Navbar = () => {
               onClick={() => {
                 setUser(null);
               }}
-              className='text-gray-600 mx-3 '>
+              className='text-gray-600 mx-3 cursor-pointer '>
               Sign out
             </li>
           </>

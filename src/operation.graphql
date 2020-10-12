@@ -109,5 +109,9 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 mutation login($identifier: String!, $password: String!) {
   login(input: { identifier: $identifier, password: $password }) {
     jwt
+    user {
+      username
+      email
+    }
   }
 }

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 interface Props {}
 
 export const Profile = (props: Props) => {
-  return <div>profile</div>;
+  const { user } = useContext(UserContext);
+  console.log(user);
+  return <div>test</div>;
 };

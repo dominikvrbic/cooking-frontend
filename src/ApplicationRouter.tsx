@@ -1,12 +1,12 @@
 import React from 'react';
 import { Home } from './pages/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { LoginPage } from './pages/LoginPage';
+import LoginPage from './pages/LoginPage';
 import { Profile } from './pages/Profile';
 import { Recipe } from './pages/Recipe';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { Signup } from './pages/Signup';
+import Signup from './pages/Signup';
 
 export const ApplicationRouter = () => {
   return (

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { createUser } from '../utlis/userFunctions';
+import { UserContext } from '../context/UserContext';
+import { useContext } from 'react';
 
-interface Props {}
+export default ({ history }) => {
+  const { user, setUser } = useContext(UserContext);
 
-export const Signup = (props: Props) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    createUser(data.username, data.password, data.email);
+    const userData = createUser(data.username, data.password, data.email);
+    setUser(userData);
   };
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user, history]);
 
   return (
     <div className='flex justify-center pt-5'>

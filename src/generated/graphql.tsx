@@ -1537,6 +1537,10 @@ export type LoginMutation = (
   & { login: (
     { __typename?: 'UsersPermissionsLoginPayload' }
     & Pick<UsersPermissionsLoginPayload, 'jwt'>
+    & { user: (
+      { __typename?: 'UsersPermissionsMe' }
+      & Pick<UsersPermissionsMe, 'username' | 'email'>
+    ) }
   ) }
 );
 
@@ -1733,6 +1737,10 @@ export const LoginDocument = gql`
     mutation login($identifier: String!, $password: String!) {
   login(input: {identifier: $identifier, password: $password}) {
     jwt
+    user {
+      username
+      email
+    }
   }
 }
     `;
