@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { CreateUserDocument, LoginDocument } from '../generated/graphql';
 import { print } from 'graphql';
 const config = {
-  apiUrl: 'http://localhost:1337/graphql',
+  apiUrl: 'https://api.cooking.vrbic.org/graphql',
 };
 export async function createUser(username, password, email) {
   try {

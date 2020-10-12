@@ -1538,7 +1538,7 @@ export type CreateUserMutation = (
     { __typename?: 'createUserPayload' }
     & { user?: Maybe<(
       { __typename?: 'UsersPermissionsUser' }
-      & Pick<UsersPermissionsUser, 'username' | 'email'>
+      & Pick<UsersPermissionsUser, 'id' | 'username' | 'email'>
     )> }
   )> }
 );
@@ -1556,9 +1556,33 @@ export type LoginMutation = (
     & Pick<UsersPermissionsLoginPayload, 'jwt'>
     & { user: (
       { __typename?: 'UsersPermissionsMe' }
-      & Pick<UsersPermissionsMe, 'username' | 'email'>
+      & Pick<UsersPermissionsMe, 'id' | 'username' | 'email'>
     ) }
   ) }
+);
+
+export type FindProfileQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type FindProfileQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'UsersPermissionsUser' }
+    & Pick<UsersPermissionsUser, 'email'>
+    & { avatar?: Maybe<(
+      { __typename?: 'UploadFile' }
+      & Pick<UploadFile, 'url'>
+    )>, recipes?: Maybe<Array<Maybe<(
+      { __typename?: 'Recipe' }
+      & Pick<Recipe, 'name' | 'slug'>
+      & { image?: Maybe<(
+        { __typename?: 'UploadFile' }
+        & Pick<UploadFile, 'url'>
+      )> }
+    )>>> }
+  )> }
 );
 
 
@@ -1754,6 +1778,7 @@ export const CreateUserDocument = gql`
     mutation createUser($username: String!, $email: String!, $password: String!) {
   createUser(input: {data: {username: $username, email: $email, password: $password}}) {
     user {
+      id
       username
       email
     }
@@ -1792,6 +1817,7 @@ export const LoginDocument = gql`
   login(input: {identifier: $identifier, password: $password}) {
     jwt
     user {
+      id
       username
       email
     }
@@ -1824,3 +1850,46 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const FindProfileDocument = gql`
+    query findProfile($id: ID!) {
+  user(id: $id) {
+    email
+    avatar {
+      url
+    }
+    recipes {
+      name
+      slug
+      image {
+        url
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFindProfileQuery__
+ *
+ * To run a query within a React component, call `useFindProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFindProfileQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useFindProfileQuery(baseOptions?: Apollo.QueryHookOptions<FindProfileQuery, FindProfileQueryVariables>) {
+        return Apollo.useQuery<FindProfileQuery, FindProfileQueryVariables>(FindProfileDocument, baseOptions);
+      }
+export function useFindProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindProfileQuery, FindProfileQueryVariables>) {
+          return Apollo.useLazyQuery<FindProfileQuery, FindProfileQueryVariables>(FindProfileDocument, baseOptions);
+        }
+export type FindProfileQueryHookResult = ReturnType<typeof useFindProfileQuery>;
+export type FindProfileLazyQueryHookResult = ReturnType<typeof useFindProfileLazyQuery>;
+export type FindProfileQueryResult = Apollo.QueryResult<FindProfileQuery, FindProfileQueryVariables>;

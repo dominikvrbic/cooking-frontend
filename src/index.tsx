@@ -7,7 +7,7 @@ import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import UserContextProvider from './context/UserContext';
 const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: 'https://api.cooking.vrbic.org/graphql',
   cache: new InMemoryCache(),
 });
 ReactDOM.render(
