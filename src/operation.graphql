@@ -1,0 +1,195 @@
+query findRecipe($slug: String!) {
+  recipes(where: { slug: $slug }) {
+    image {
+      url
+    }
+    reviews {
+      comment
+      grade
+      users_permissions_user {
+        username
+        avatar {
+          url
+        }
+      }
+    }
+
+    description
+    name
+    number_of_servings
+    time
+    steps {
+      step
+    }
+    ingredients {
+      ingredient
+    }
+    users_permissions_user {
+      username
+      avatar {
+        url
+      }
+    }
+  }
+}
+
+query searchRecipes($searchString: String) {
+  recipes(where: { _q: $searchString }) {
+    name
+    slug
+    image {
+      url
+    }
+  }
+}
+
+query getHomepage {
+  homePage {
+    topRated {
+      recipe {
+        ingredients {
+          ingredient
+        }
+        name
+        slug
+        description
+        image {
+          name
+          url
+          hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
+        }
+      }
+    }
+    mostViewed {
+      recipe {
+        ingredients {
+          ingredient
+        }
+        name
+        slug
+        description
+        image {
+          name
+          url
+          hash
+        }
+        users_permissions_user {
+          username
+          avatar {
+            url
+          }
+        }
+      }
+    }
+    weRecommend {
+      users_permissions_user {
+        username
+        updated_at
+        avatar {
+          url
+        }
+      }
+      description
+      name
+      slug
+      image {
+        name
+        url
+        hash
+      }
+    }
+  }
+}
+mutation createUser($username: String!, $email: String!, $password: String!) {
+  createUser(
+    input: { data: { username: $username, email: $email, password: $password } }
+  ) {
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+mutation login($identifier: String!, $password: String!) {
+  login(input: { identifier: $identifier, password: $password }) {
+    jwt
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+query findProfile($id: ID!) {
+  user(id: $id) {
+    email
+    avatar {
+      url
+    }
+    recipes {
+      name
+      slug
+      image {
+        url
+      }
+    }
+  }
+}
+
+mutation updateUser(
+  $userId: ID!
+  $password: String
+  $avatar: ID
+  $email: String
+) {
+  updateUser(
+    input: {
+      data: { password: $password, avatar: $avatar, email: $email }
+      where: { id: $userId }
+    }
+  ) {
+    user {
+      id
+    }
+  }
+}
+
+mutation createRecipe(
+  $name: String!
+  $description: String!
+  $numberOfServings: Int!
+  $time: Int!
+  $imageId: ID
+  $userId: ID!
+  $slug: String!
+  $ingredients: [ComponentIngredientsIngredientInput!]
+  $steps: [ComponentStepsStepInput!]
+) {
+  createRecipe(
+    input: {
+      data: {
+        name: $name
+        number_of_servings: $numberOfServings
+        time: $time
+        steps: $steps
+        ingredients: $ingredients
+        description: $description
+        image: $imageId
+        users_permissions_user: $userId
+        slug: $slug
+      }
+    }
+  ) {
+    recipe {
+      id
+    }
+  }
+}
