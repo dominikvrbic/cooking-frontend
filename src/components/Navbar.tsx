@@ -18,6 +18,9 @@ export const Navbar = () => {
             <Link to='/profile'>
               <li className='text-gray-600 mx-3 '>Profile</li>
             </Link>
+            <Link to='/editRecipe'>
+              <li className='text-gray-600 mx-3 '>Add Recipe</li>
+            </Link>
             <li
               onClick={() => {
                 setUser(null);

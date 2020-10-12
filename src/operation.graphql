@@ -161,3 +161,35 @@ mutation updateUser(
     }
   }
 }
+
+mutation createRecipe(
+  $name: String!
+  $description: String!
+  $numberOfServings: Int!
+  $time: Int!
+  $imageId: ID
+  $userId: ID!
+  $slug: String!
+  $ingredients: [ComponentIngredientsIngredientInput!]
+  $steps: [ComponentStepsStepInput!]
+) {
+  createRecipe(
+    input: {
+      data: {
+        name: $name
+        number_of_servings: $numberOfServings
+        time: $time
+        steps: $steps
+        ingredients: $ingredients
+        description: $description
+        image: $imageId
+        users_permissions_user: $userId
+        slug: $slug
+      }
+    }
+  ) {
+    recipe {
+      id
+    }
+  }
+}

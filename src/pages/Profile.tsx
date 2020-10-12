@@ -54,7 +54,7 @@ export const Profile = (props: Props) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className='container'>
+        <div className='container mx-auto'>
           <div className='flex justify-center pt-5'>
             <div className='w-full max-w-xs items-center'>
               <div className='p-5'>

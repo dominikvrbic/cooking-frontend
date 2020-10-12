@@ -13,6 +13,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import Signup from './pages/Signup';
 import { UserContext } from './context/UserContext';
+import EditRecipe from './pages/EditRecipe';
 
 export const ApplicationRouter = () => {
   const { user } = useContext(UserContext);
@@ -28,6 +29,11 @@ export const ApplicationRouter = () => {
             <Route exact path='/signup' component={Signup} />
             {user ? (
               <Route exact path='/profile' component={Profile} />
+            ) : (
+              <Redirect to='/' />
+            )}
+            {user ? (
+              <Route exact path='/editRecipe' component={EditRecipe} />
             ) : (
               <Redirect to='/' />
             )}
