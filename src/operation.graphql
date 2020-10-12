@@ -33,6 +33,16 @@ query findRecipe($slug: String!) {
   }
 }
 
+query searchRecipes($searchString: String) {
+  recipes(where: { _q: $searchString }) {
+    name
+    slug
+    image {
+      url
+    }
+  }
+}
+
 query getHomepage {
   homePage {
     topRated {
