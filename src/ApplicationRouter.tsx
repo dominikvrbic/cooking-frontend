@@ -7,9 +7,8 @@ import { Recipe } from './pages/Recipe';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Signup } from './pages/Signup';
-import { observer } from 'mobx-react-lite';
 
-export const ApplicationRouter = observer(() => {
+export const ApplicationRouter = () => {
   return (
     <Router>
       <div className='flex flex-col h-screen justify-between'>
@@ -27,4 +26,4 @@ export const ApplicationRouter = observer(() => {
       </div>
     </Router>
   );
-});
+};

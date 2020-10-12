@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { hat, Search } from '../assets';
 import { Link } from 'react-router-dom';
-import { userStore } from '../userStore';
-import { observer } from 'mobx-react';
+import { UserContext } from '../context/UserContext';
 
-export const Navbar = observer(() => {
+export const Navbar = () => {
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <div className='flex flex-col  items-center h-42  bg-gray-100  pb-5 '>
       <Link to='/'>
         <img src={hat} alt='hat' className='cursor-pointer' />
       </Link>
       <ul className='flex'>
-        {userStore.jwt ? (
+        {user ? (
           <>
             <Link to='/profile'>
               <li className='text-gray-600 mx-3 '>Profile</li>
             </Link>
-            <Link to='/profile'>
-              <li className='text-gray-600 mx-3 '>Sign out</li>
-            </Link>
+            <li
+              onClick={() => {
+                setUser(null);
+              }}
+              className='text-gray-600 mx-3 '>
+              Sign out
+            </li>
           </>
         ) : (
           <>
@@ -44,4 +49,4 @@ export const Navbar = observer(() => {
       </div>
     </div>
   );
-});
+};

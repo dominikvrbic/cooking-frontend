@@ -5,6 +5,7 @@ import './assets/main.css';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import UserContextProvider from './context/UserContext';
 const client = new ApolloClient({
   uri: 'http://localhost:1337/graphql',
   cache: new InMemoryCache(),
@@ -12,7 +13,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
-      <App />
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
     </React.StrictMode>
   </ApolloProvider>,
   document.getElementById('root')

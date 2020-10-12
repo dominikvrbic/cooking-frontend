@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { login } from '../utlis/userFunctions';
-import { observer } from 'mobx-react';
 
 interface Props {}
 
-export const LoginPage = observer((props: Props) => {
+export const LoginPage = (props: Props) => {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     console.log(data);
@@ -62,4 +61,4 @@ export const LoginPage = observer((props: Props) => {
       </div>
     </div>
   );
-});
+};
