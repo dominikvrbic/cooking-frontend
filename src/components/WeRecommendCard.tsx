@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Recipe } from '../generated/graphql';
-import getUrl from '../utlis/getUrl';
+import getUrl from '../utils/getUrl';
 interface Props {
   weRecommend: Recipe | any;
 }

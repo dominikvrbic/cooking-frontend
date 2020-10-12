@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Search } from '../assets';
 import { SearchRecipesDocument } from '../generated/graphql';
 import Axios from 'axios';
 import { print } from 'graphql';
 import { useAsync } from 'react-use';
+import getUrl from '../utils/getUrl';
 
 const config = {
   apiUrl: 'https://api.cooking.vrbic.org/graphql',
@@ -14,7 +15,7 @@ export async function searchRecipes(_q) {
     const { data } = await Axios.post(config.apiUrl, {
       query: print(SearchRecipesDocument),
       variables: {
-        _q,
+        searchString: _q,
       },
     });
     return data;
@@ -34,9 +35,7 @@ export const Searchh = () => {
 
   useAsync(async () => {
     const { data } = await searchRecipes(searchTerm);
-    setSearchResults(data);
-    //@ts-ignore
-    console.log(searchResults.recipes);
+    setSearchResults(data.recipes);
   }, [searchTerm]);
 
   return (
@@ -52,15 +51,22 @@ export const Searchh = () => {
       <button type='submit' className='absolute right-0 top-0 mt-5 mr-4'>
         <Search className='text-gray-600 h-4 w-4 fill-current ' />
       </button>
-      {/* {searchResults && (
+      {searchTerm && searchResults.length && (
         <ul>
-          {searchResults.recipes.map((item) => (
+          {searchResults.map((item) => (
             <li key={item.slug}>
-              <Link to={`/recipe/${item.slug}`}>{item}</Link>
+              <Link to={`/recipe/${item.slug}`}>
+                <img
+                  src={getUrl(item.image.url)}
+                  alt={item.image.name}
+                  style={{ width: '100px' }}
+                />
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>
-      )} */}
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentHomepageTopRated } from '../generated/graphql';
-import getUrl from '../utlis/getUrl';
+import getUrl from '../utils/getUrl';
 import { Link } from 'react-router-dom';
 
 interface Props {

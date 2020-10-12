@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { createUser } from '../utlis/userFunctions';
+import { createUser } from '../utils/userFunctions';
 import { UserContext } from '../context/UserContext';
 import { useContext } from 'react';
 

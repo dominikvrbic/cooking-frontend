@@ -2,7 +2,7 @@ import React from 'react';
 import { useFindRecipeQuery } from '../generated/graphql';
 import Spinner from '../components/Spinner';
 import { useParams } from 'react-router-dom';
-import getUrl from '../utlis/getUrl';
+import getUrl from '../utils/getUrl';
 interface RouterParams {
   slug: string;
 }
