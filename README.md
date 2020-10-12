@@ -50,3 +50,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - More options for search/filtering
 - Unit testing
 - Ability to edit/remove recipes
+- Clean up the code 
