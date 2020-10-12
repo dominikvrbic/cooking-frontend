@@ -3,9 +3,13 @@ import { SpinnerGif } from '../assets';
 
 const Spinner = () => {
   return (
-    <>
-      <img src={SpinnerGif} alt='Loading...' />
-    </>
+    <div>
+      <img
+        className='mx-auto object-center'
+        src={SpinnerGif}
+        alt='Loading...'
+      />
+    </div>
   );
 };
 
