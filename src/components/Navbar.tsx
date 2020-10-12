@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { hat, Search } from '../assets';
+import { hat } from '../assets';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { Searchh } from './Searchh';

@@ -9,5 +9,7 @@ export const Profile = (props: Props) => {
   const { user } = useContext(UserContext);
   const { data, loading } = useFindProfileQuery();
   console.log(user);
-  return <>{loading ? <Spinner /> : <div className=''>data</div>}</>;
+  return (
+    <>{loading ? <Spinner /> : <div className=''>{data.user.email}</div>}</>
+  );
 };
