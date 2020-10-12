@@ -26,9 +26,7 @@ export const WeRecommendCard = (props: Props) => {
               {weRecommend.name}
             </div>
             <p className='text-gray-700 text-base'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
+              {weRecommend?.description}
             </p>
           </div>
           <div className='flex items-center'>

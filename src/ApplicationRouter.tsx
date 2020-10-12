@@ -27,17 +27,16 @@ export const ApplicationRouter = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/signup' component={Signup} />
-            {user ? (
-              <Route exact path='/profile' component={Profile} />
-            ) : (
-              <Redirect to='/' />
-            )}
-            {user ? (
-              <Route exact path='/editRecipe' component={EditRecipe} />
-            ) : (
-              <Redirect to='/' />
-            )}
             <Route exact path='/recipe/:slug' component={Recipe} />
+
+            {user ? (
+              <>
+                <Route exact path='/profile' component={Profile} />
+                <Route exact path='/editRecipe' component={EditRecipe} />
+              </>
+            ) : (
+              <Redirect to='/' />
+            )}
           </Switch>
         </div>
         <Footer />
