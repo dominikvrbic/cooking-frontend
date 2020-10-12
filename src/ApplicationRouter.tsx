@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Home } from './pages/Home';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import { Profile } from './pages/Profile';
 import { Recipe } from './pages/Recipe';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import Signup from './pages/Signup';
+import { UserContext } from './context/UserContext';
 
 export const ApplicationRouter = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <Router>
       <div className='flex flex-col h-screen justify-between'>
@@ -18,7 +26,11 @@ export const ApplicationRouter = () => {
             <Route exact path='/' component={Home} />
             <Route exact path='/login' component={LoginPage} />
             <Route exact path='/signup' component={Signup} />
-            <Route exact path='/profile' component={Profile} />
+            {user ? (
+              <Route exact path='/profile' component={Profile} />
+            ) : (
+              <Redirect to='/' />
+            )}
             <Route exact path='/recipe/:slug' component={Recipe} />
           </Switch>
         </div>
