@@ -143,3 +143,21 @@ query findProfile($id: ID!) {
     }
   }
 }
+
+mutation updateUser(
+  $userId: ID!
+  $password: String
+  $avatar: ID
+  $email: String
+) {
+  updateUser(
+    input: {
+      data: { password: $password, avatar: $avatar, email: $email }
+      where: { id: $userId }
+    }
+  ) {
+    user {
+      id
+    }
+  }
+}

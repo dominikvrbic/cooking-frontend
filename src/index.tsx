@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
 import './assets/main.css';
 import * as serviceWorker from './serviceWorker';
-import { ApolloProvider, createHttpLink, HttpLink } from '@apollo/client';
+import { ApolloProvider, createHttpLink } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import UserContextProvider, { UserContext } from './context/UserContext';
+import UserContextProvider from './context/UserContext';
 
 const authLink = setContext((_, { headers }) => {
   const userDataJSON = window.localStorage.getItem('user');
