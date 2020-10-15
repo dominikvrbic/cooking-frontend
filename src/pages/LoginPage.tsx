@@ -9,7 +9,6 @@ export default ({ history }) => {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     const userData = await login(data.username, data.password);
     setUser(userData);
   };

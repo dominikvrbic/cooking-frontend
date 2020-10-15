@@ -65,17 +65,15 @@ export default ({ history }) => {
             />
           </div>
           <div className='flex items-center justify-between'>
-            <Link to='/login'>
-              <button
-                className='bg-white hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-                type='submit'>
-                Login
-              </button>
+            <Link
+              to='/Login'
+              className='bg-white hover:text-blue-700 text-blue-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+              Log in
             </Link>
             <button
               className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
               type='submit'>
-              Log in
+              Sign up
             </button>
           </div>
         </form>
